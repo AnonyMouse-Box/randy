@@ -2,8 +2,8 @@
 
 
 import random
-import coin
-import die
+from . import coin
+from . import die
 
 class Randy(object):
     '''
