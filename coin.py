@@ -2,6 +2,7 @@
 
 
 import random
+from . import test
 
 class coin:
     def __init__(self):
@@ -41,3 +42,12 @@ class coin:
         self.__setTails(tails)
         self.__setClumsy(clumsy)
         return;
+
+    def parseCoin(self, times, heads, tails, clumsy):
+        times.ifExists(1)
+        heads.ifExists(1)
+        tails.ifExists(1)
+        clumsy.ifExists(0)
+        self.weightCoin(heads.value, tails.value, clumsy.value)
+        results = self.flipCoins(times.value)
+        return results;
