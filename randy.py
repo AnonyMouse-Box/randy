@@ -3,9 +3,9 @@
 
 import random
 import re
-import coin
-import die
-import test
+from . import coin
+from . import die
+from . import test
 
 class Randy(object):
     '''
