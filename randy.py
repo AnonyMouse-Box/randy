@@ -5,6 +5,7 @@ import random
 import re
 from . import coin
 from . import die
+from . import test
 
 class Randy(object):
     '''
@@ -28,41 +29,31 @@ class Randy(object):
 
         # detects coin input
         if match_coin:
+            times = test.test(match_coin.group(1))
+            heads = test.test(match_coin.group(1))
+            tails = test.test(match_coin.group(1))
+            clumsy = test.test(match_coin.group(1))
             a = coin.coin()
-            times = match_coin.group(1)
-            if times == "":
-                times = 1
-            else:
-                times = int(times)
-            heads = match_coin.group(1)
-            tails = match_coin.group(1)
-            clumsy = match_coin.group(1)
-            print("heads = {0}\ntails = {1}\nclumsy = {2}".format(heads, tails, clumsy))
-            results = a.flipCoins(times)
-            slug = "You flipped a coin " + str(times) + " times, the result was:\n"
+            print("times = {0}\nheads = {1}\ntails = {2}\nclumsy = {3}".format(times.value, heads.value, tails.value, clumsy.value))
+            results = a.parseCoin(times, heads, tails, clumsy)
+            slug = "You flipped a coin " + str(times.value) +  " times, the result was:\n"
 
         # detects dice input
         elif match_dice:
-            faces = match_dice.group(5)
-            if faces == "" or int(faces) < 1:
-                faces = 6
-            else:
-                faces = int(faces)
-            a = die.createSimpleDie(faces)
-            times = match_dice.group(1)
-            if times == "":
-                times = 1
-            else:
-                times = int(times)
-            number = match_dice.group(1)
-            load = match_dice.group(1)
-            rest = match_dice.group(1)
-            clumsy = match_dice.group(1)
-            operand = match_dice.group(1)
-            value = match_dice.group(1)
-            print("number = {0}\nload = {1}\nrest = {2}\nclumsy = {3}\noperand = {4}\nvalue = {5}\n".format(number, load, rest, clumsy, operand, value))
-            results = a.rollDice(times)
-            slug = "You rolled a D" + str(faces) + " " + str(times) + " times, the result was:\n"
+            times = test.test(match_dice.group(1))
+            faces = test.test(match_dice.group(5))
+            number = test.test(match_dice.group(1))
+            load = test.test(match_dice.group(1))
+            rest = test.test(match_dice.group(1))
+            clumsy = test.test(match_dice.group(1))
+            operand = test.test(match_dice.group(1))
+            factor = test.test(match_dice.group(1))
+            faces.ifExists(6)
+            a = die.createSimpleDie(faces.value)
+            print("times = {0}\nfaces = {1}\nnumber = {2}\nload = {3}\nrest = {4}\nclumsy = {5}\noperand = {6}\nvalue = {7}\n".format(times.value, faces.value, number.value, load.value, rest.value, clumsy.value, operand.value, factor.value))
+            times.ifExists(1)
+            results = a.rollDice(times.value)
+            slug = "You rolled a D" + str(faces.value) + " " + str(times.value) + " times, the result was:\n"
 
 
         # detects help message
