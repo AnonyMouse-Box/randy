@@ -3,9 +3,9 @@
 
 import random
 import re
-from . import coin
-from . import die
-from . import test
+import coin
+import die
+import test
 
 class Randy(object):
     '''
@@ -51,8 +51,7 @@ class Randy(object):
             faces.ifExists(6)
             a = die.createSimpleDie(faces.value)
             print("times = {0}\nfaces = {1}\nnumber = {2}\nload = {3}\nrest = {4}\nclumsy = {5}\noperand = {6}\nvalue = {7}\n".format(times.value, faces.value, number.value, load.value, rest.value, clumsy.value, operand.value, factor.value))
-            times.ifExists(1)
-            results = a.rollDice(times.value)
+            results = a.parseDice(times, faces, number, load, rest, clumsy, operand, factor)
             slug = "You rolled a D" + str(faces.value) + " " + str(times.value) + " times, the result was:\n"
 
 
