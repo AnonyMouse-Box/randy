@@ -2,6 +2,7 @@
 
 
 import random
+import test
 
 class die:
     def __init__(self, start, stop, step):
@@ -37,6 +38,19 @@ class die:
     def rollDice(self, quantity):
         dice = [self.__rollDie() for a in range(quantity)]
         return dice;
+
+    def parseDice(self, times, faces, number, load, rest, clumsy, operand, factor):
+        times.ifExists(1)
+        number.ifExists(1)
+        load.ifExists(1)
+        rest.ifExists(1)
+        clumsy.ifExists(0)
+        for face in self.weights:
+            self.setWeight(face, rest.value)
+        self.setWeight(number.value, load.value)
+        self.setClumsy(clumsy.value)
+        results = self.rollDice(times.value)
+        return results;
 
 def createSimpleDie(sides):
     return die(1, sides + 1, 1);
