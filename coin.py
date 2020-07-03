@@ -2,7 +2,7 @@
 
 
 import random
-import test
+from . import test
 
 class coin:
     def __init__(self):
