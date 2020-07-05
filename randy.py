@@ -54,12 +54,8 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
         else:
             matches = get_message("text", message['content'])
 
-            # catches any other kind of input
-            if len(matches) == 0:
-                content = "I'm sorry what was that? I don't understand.\nType `help` to see the commands I know."
-
             # detects coin input
-            elif len(matches) == 4:
+            if len(matches) == 4:
                 a = coin.coin()
                 print("times = {0}\nheads = {1}\ntails = {2}\nclumsy = {3}".format(times.value, heads.value, tails.value, clumsy.value))
                 results = a.parseCoin(times, heads, tails, clumsy)
@@ -73,7 +69,9 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                 results = a.parseDice(times, faces, number, load, rest, clumsy, operand, factor)
                 slug = "You rolled a D" + str(faces.value) + " " + str(times.value) + " times, the result was:\n"
 
-
+            # catches any other kind of input
+            else:
+                content = "I'm sorry what was that? I don't understand.\nType `help` to see the commands I know."
 
 
 
