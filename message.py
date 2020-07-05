@@ -30,15 +30,11 @@ class message(object):
         self.__request = int(self.__match.group(1))
         return;
 
-def get_message(name):
+def get_message(name, text):
     name = message()
-    name.set_text(input("Enter N value: "))
-    print("\n")
+    name.set_text(text)
     try:
         name.validate()
         return name.get_request();
     except TypeError as error:
         print("Error: invalid input, {0}".format(error))
-
-n = get_message("text")
-print(n)
