@@ -72,15 +72,22 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
             elif len(matches) == 8:
                 times = test.test(matches[0])
                 faces = test.test(matches[1])
-                number = test.test(matches[2])
-                load = test.test(matches[3])
-                rest = test.test(matches[4])
-                clumsy = test.test(matches[5])
-                operand = matches[6]
-                value = test.test(matches[7])
+                stop = test.test(matches[2])
+                step = test.test(matches[3])
+                number = test.test(matches[4])
+                load = test.test(matches[5])
+                rest = test.test(matches[6])
+                clumsy = test.test(matches[7])
+                operand = matches[8]
+                value = test.test(matches[9])
                 faces.ifExists(6)
-                a = die.createSimpleDie(faces.value)
-                print("times = {0}\nfaces = {1}\nnumber = {2}\nload = {3}\nrest = {4}\nclumsy = {5}\noperand = {6}\nvalue = {7}\n".format(times.value, faces.value, number.value, load.value, rest.value, clumsy.value, operand.value, factor.value))
+                if stop.value == "":
+                    a = die.createSimpleDie(faces.value)
+                else:
+                    stop.ifExists(6)
+                    step.ifExists(1)
+                    a = die.die()
+                print("times = {0}\nfaces = {1}\nstop = {2}\nstep = {3}\nnumber = {4}\nload = {5}\nrest = {6}\nclumsy = {7}\noperand = {8}\nvalue = {9}\n".format(times.value, faces.value, stop.value, step.value, number.value, load.value, rest.value, clumsy.value, operand, factor.value))
                 results = a.parseDice(times, faces, number, load, rest, clumsy, operand, factor)
                 slug = "You rolled a D" + str(faces.value) + " " + str(times.value) + " times, the result was:\n"
 
