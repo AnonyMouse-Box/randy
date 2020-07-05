@@ -2,6 +2,7 @@
 
 
 import re
+from . import message
 from . import coin
 from . import die
 from . import test
@@ -15,6 +16,7 @@ class Randy(object):
         return '''This bot generates random coins and dice with biases'''
 
     def handle_message(self, message, bot_handler):
+        # text = get_message("text", message['content'])
         results = ""
 
         # put input into lowercase and strip extra whitespace
