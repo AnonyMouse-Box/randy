@@ -27,7 +27,7 @@ Synopsis:
 Coin; @randy {<times> }c{oins weight <heads>:<tails>:<clumsy>}
 Examples; long:- `@randy 20 coin weight 20:10:30`, short:- `@randy 20cw2:1:3`
 ------------
-Dice; @randy {<times> }d{ice <faces> weight <number> <load>:<rest>:<clumsy> <operand>}
+Dice; @randy {<times> }d{ice <faces>,<stop>,<step> weight <number> <load>:<rest>:<clumsy> <operand>}
 Examples; long:- `@randy 20 dice 16,24,2 weight 15 20:10:30 +89`, short:- `@randy 20d16,24,2w15 20:10:30+89`
 ------------
 Times - the number of times the action will be performed, with dice all results will be automatically accumulated and a final result given.
