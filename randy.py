@@ -90,7 +90,6 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                     a = die.die(faces.value, stop.value, step.value)
                 print("times = {0}\nfaces = {1}\nstop = {2}\nstep = {3}\nnumber = {4}\nload = {5}\nrest = {6}\nclumsy = {7}\noperand = {8}\nvalue = {9}\n".format(times.value, faces.value, stop.value, step.value, number.value, load.value, rest.value, clumsy.value, operand, factor.value))
                 results = a.parseDice(times, number, load, rest, clumsy)
-                acc = 
                 slug = "You rolled a D" + str(a.faces) + " " + str(times.value) + " times, the result was:\n"
 
             # catches any other kind of input
@@ -100,13 +99,24 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
             # parses output in message friendly way
             if content = False:
                 content = ""
+                acc = 0
                 for item in results:
+                    acc += item
                     content += ", " + str(item)
                 content = content[2:]
                 content = slug + content
                 if operand == "" and len(matches) == 10:
                     content += " = " + str(acc)
                 elif operand != 0:
+                    value.ifExists(1)
+                    if operand == "+":
+                        acc += value.value
+                    elif operand == "-":
+                        acc -= value.value
+                    elif operand == "*":
+                        acc *= value.value
+                    elif operand == "/":
+                        acc /= value.value
                     content += " " operand + " " + str(value.value) + " = " + str(acc)
 
         # sends completed message and ends
