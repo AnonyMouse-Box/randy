@@ -64,9 +64,7 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                 tails = test.test(matches[2])
                 clumsy = test.test(matches[3])
                 item = coin.coin()
-                
                 print("times = {0}\nheads = {1}\ntails = {2}\nclumsy = {3}".format(times.value, heads.value, tails.value, clumsy.value))
-                
                 results = a.parseCoin(times, heads, tails, clumsy)
                 slug = "You flipped a coin " + str(times.value) +  " times, the result was:\n"
 
@@ -89,9 +87,9 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                     faces.ifExists(1)
                     stop.ifExists(6)
                     step.ifExists(1)
-                    a = die.die(faces, stop, step)
+                    a = die.die(faces.value, stop.value, step.value)
                 print("times = {0}\nfaces = {1}\nstop = {2}\nstep = {3}\nnumber = {4}\nload = {5}\nrest = {6}\nclumsy = {7}\noperand = {8}\nvalue = {9}\n".format(times.value, faces.value, stop.value, step.value, number.value, load.value, rest.value, clumsy.value, operand, factor.value))
-                results = a.parseDice(times, faces, number, load, rest, clumsy, operand, factor)
+                results = a.parseDice(times, number, load, rest, clumsy, operand, factor)
                 slug = "You rolled a D" + str(a.faces) + " " + str(times.value) + " times, the result was:\n"
 
             # catches any other kind of input
