@@ -6,7 +6,8 @@ import re
 class message(object):
     def __init__(self):
         self.__text = False
-        self.__match = False
+        self.__match_coin = False
+        self.__match_die = False
         self.__request = False
         return;
 
@@ -15,7 +16,7 @@ class message(object):
         return;
 
     def get_request(self):
-        if self.__request == False:
+        if self.__match_coin == False and self.__match_dice == False:
             raise TypeError("validate input first!")
         return self.__request;
 
@@ -24,10 +25,13 @@ class message(object):
             raise TypeError("set text first!")
         elif self.__text == "":
             raise TypeError("empty string!")
-        self.__match = re.match("^([0-9]{1,})$", self.__text)
-        if self.__match == None:
-            raise TypeError("not an integer")
-        self.__request = int(self.__match.group(1))
+        self.__match_coin = re.search("^([0-9]{1,})$", self.__text)
+        self.__match_dice = re.search("^([0-9]{1,})$", self.__text)
+        if self.__match_coin == None and self.__match_dice == None:
+            raise TypeError("no match")
+        return;
+
+    def set_matches(self):
         return;
 
 def get_message(name, text):
@@ -35,6 +39,7 @@ def get_message(name, text):
     name.set_text(text)
     try:
         name.validate()
+        name.set_matches()
         return name.get_request();
     except TypeError as error:
         print("Error: invalid input, {0}".format(error))
