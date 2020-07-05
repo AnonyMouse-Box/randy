@@ -40,13 +40,15 @@ class message(object):
             self.__matches[3] = match_coin.group(13)
         elif self.__match_die != None:
             self.__matches[0] = match_dice.group(1)
-            self.__matches[1] = match_dice.group(5)
-            self.__matches[2] = match_dice.group(11)
-            self.__matches[3] = match_dice.group(13)
-            self.__matches[4] = match_dice.group(14)
-            self.__matches[5] = match_dice.group(16)
+            self.__matches[1] = match_dice.group(6)
+            self.__matches[2] = match_dice.group(9)
+            self.__matches[3] = match_dice.group(10)
+            self.__matches[4] = match_dice.group(16)
+            self.__matches[5] = match_dice.group(18)
             self.__matches[6] = match_dice.group(19)
-            self.__matches[7] = match_dice.group(20)
+            self.__matches[7] = match_dice.group(16)
+            self.__matches[8] = match_dice.group(24)
+            self.__matches[9] = match_dice.group(25)
         else:
             raise TypeError("no match!")
         return;
