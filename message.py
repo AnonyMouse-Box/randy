@@ -2,6 +2,7 @@
 
 
 import re
+from . import test
 
 class message(object):
     def __init__(self):
@@ -15,8 +16,6 @@ class message(object):
         return;
 
     def get_request(self):
-        if self.__match_coin == False and self.__match_dice == False:
-            raise TypeError("validate input first!")
         return;
 
     def validate(self):
@@ -24,15 +23,18 @@ class message(object):
             raise TypeError("set text first!")
         elif self.__text == "":
             raise TypeError("empty string!")
-        self.__match_coin = re.search("([0-9]{1,2}|)( |)c(oin(s|)|)( |)(w(eight|)|)( |)([0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}|)|)", self.__text)
-        self.__match_dice = re.search("([0-9]{1,2}|)( |)d(ice|ie|)( |)([0-9]{1,2}|)( |)(w(eight|)|)( |)([0-9]{1,2}( [0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}|)|)|)( |)((\+|\-|\/|\*)[0-9]{1,2}|)", self.__text)
-        if self.__match_coin == None and self.__match_dice == None:
-            raise TypeError("no match!")
+        self.__match_coin = re.search("([0-9]+|)( |)c(oin(s|)|)( |)(w(eight|)|)( |)(([0-9]+):([0-9]+)(:([0-9]+)|)|)", self.__text)
+        self.__match_dice = re.search("([0-9]+|)( |)d(ice|ie|)( |)([0-9]+|)( |)(w(eight|)|)( |)([0-9]+( [0-9]+:[0-9]+(:[0-9]+|)|)|)( |)((\+|\-|\/|\*)[0-9]+|)", self.__text)
         return;
 
     def set_matches(self):
-        if self.__match_coin != None:
-            
+        if self.__match_coin == False and self.__match_dice == False:
+            raise TypeError("validate input first!")
+        elif self.__match_coin != None:
+            self.__matches[0] = test.test(match_coin.group(1))
+            self.__matches[1] = test.test(match_coin.group(10))
+            self.__matches[2] = test.test(match_coin.group(11))
+            self.__matches[3] = test.test(match_coin.group(13))
         elif self.__match_die != None:
             
         else:
