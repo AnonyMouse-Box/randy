@@ -27,7 +27,7 @@ class message(object):
         elif self.__text == "":
             raise TypeError("empty string!")
         self.__match_coin = re.search("(([0-9]+)? ?)c(oin(s)?)?( ?w(eight)? ?([0-9]+):([0-9]+)(:([0-9]+))?)?", self.__text)
-        self.__match_dice = re.search("((([0-9]+)? ?)d(ice)?( ?([0-9]+)(,([0-9]+),([0-9]+))?)?( ?w(eight)? ?([0-9]+) ([0-9]+):([0-9]+)(:([0-9]+))?)?( ?(\+|\-|\*|\/)([0-9]+))?", self.__text)
+        self.__match_dice = re.search("((([0-9]+)? ?)d(ice)?( ?([0-9]+)(,([0-9]+),([0-9]+))?)?( ?w(eight)? ?([0-9]+) ([0-9]+):([0-9]+)(:([0-9]+))?)?( ?(\+|\-|\*|\/) ?([0-9]+))?", self.__text)
         return;
 
     def set_matches(self):
