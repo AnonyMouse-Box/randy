@@ -69,7 +69,7 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                 slug = "You flipped a coin " + str(times.value) +  " times, the result was:\n"
 
             # detects dice input
-            elif len(matches) == 8:
+            elif len(matches) == 10:
                 times = test.test(matches[0])
                 faces = test.test(matches[1])
                 stop = test.test(matches[2])
@@ -89,7 +89,8 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                     step.ifExists(1)
                     a = die.die(faces.value, stop.value, step.value)
                 print("times = {0}\nfaces = {1}\nstop = {2}\nstep = {3}\nnumber = {4}\nload = {5}\nrest = {6}\nclumsy = {7}\noperand = {8}\nvalue = {9}\n".format(times.value, faces.value, stop.value, step.value, number.value, load.value, rest.value, clumsy.value, operand, factor.value))
-                results = a.parseDice(times, number, load, rest, clumsy, operand, factor)
+                results = a.parseDice(times, number, load, rest, clumsy)
+                acc = 
                 slug = "You rolled a D" + str(a.faces) + " " + str(times.value) + " times, the result was:\n"
 
             # catches any other kind of input
@@ -103,6 +104,10 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                     content += ", " + str(item)
                 content = content[2:]
                 content = slug + content
+                if operand == "" and len(matches) == 10:
+                    content += " = " + str(acc)
+                elif operand != 0:
+                    content += " " operand + " " + str(value.value) + " = " + str(acc)
 
         # sends completed message and ends
         bot_handler.send_reply(message, content)
