@@ -16,6 +16,7 @@ class Randy(object):
         return '''This bot generates random coins and dice with biases'''
 
     def handle_message(self, message, bot_handler):
+        content = False
         # detects help message
         if "help" in text:
             content =   """
@@ -56,8 +57,14 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
 
             # detects coin input
             if len(matches) == 4:
-                a = coin.coin()
+                times = test.test(matches[0])
+                heads = test.test(matches[1])
+                tails = test.test(matches[2])
+                clumsy = test.test(matches[3])
+                item = coin.coin()
+                
                 print("times = {0}\nheads = {1}\ntails = {2}\nclumsy = {3}".format(times.value, heads.value, tails.value, clumsy.value))
+                
                 results = a.parseCoin(times, heads, tails, clumsy)
                 slug = "You flipped a coin " + str(times.value) +  " times, the result was:\n"
 
@@ -73,16 +80,13 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
             else:
                 content = "I'm sorry what was that? I don't understand.\nType `help` to see the commands I know."
 
-
-
-        # parses output in message friendly way
-        else:
-            content = ""
-            for item in results:
-                content += ", " + str(item)
-            content = content[2:]
-            content = slug + content
-
+            # parses output in message friendly way
+            if content = False:
+                content = ""
+                for item in results:
+                    content += ", " + str(item)
+                content = content[2:]
+                content = slug + content
 
         # sends completed message and ends
         bot_handler.send_reply(message, content)
