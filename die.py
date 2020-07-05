@@ -39,7 +39,7 @@ class die:
         dice = [self.__rollDie() for a in range(quantity)]
         return dice;
 
-    def parseDice(self, times, number, load, rest, clumsy, operand, factor):
+    def parseDice(self, times, number, load, rest, clumsy:
         times.ifExists(1)
         number.ifExists(1)
         load.ifExists(1)
