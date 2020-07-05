@@ -8,7 +8,6 @@ class message(object):
         self.__text = False
         self.__match_coin = False
         self.__match_die = False
-        self.__request = False
         return;
 
     def set_text(self, text):
@@ -18,7 +17,7 @@ class message(object):
     def get_request(self):
         if self.__match_coin == False and self.__match_dice == False:
             raise TypeError("validate input first!")
-        return self.__request;
+        return;
 
     def validate(self):
         if self.__text == False:
@@ -28,10 +27,16 @@ class message(object):
         self.__match_coin = re.search("([0-9]{1,2}|)( |)c(oin(s|)|)( |)(w(eight|)|)( |)([0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}|)|)", self.__text)
         self.__match_dice = re.search("([0-9]{1,2}|)( |)d(ice|ie|)( |)([0-9]{1,2}|)( |)(w(eight|)|)( |)([0-9]{1,2}( [0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}|)|)|)( |)((\+|\-|\/|\*)[0-9]{1,2}|)", self.__text)
         if self.__match_coin == None and self.__match_dice == None:
-            raise TypeError("no match")
+            raise TypeError("no match!")
         return;
 
     def set_matches(self):
+        if self.__match_coin != None:
+            
+        elif self.__match_die != None:
+            
+        else:
+            raise TypeError("no match!")
         return;
 
 def get_message(name, text):
