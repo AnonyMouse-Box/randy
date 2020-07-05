@@ -16,46 +16,6 @@ class Randy(object):
         return '''This bot generates random coins and dice with biases'''
 
     def handle_message(self, message, bot_handler):
-        # text = get_message("text", message['content'])
-        results = ""
-
-        # put input into lowercase and strip extra whitespace
-        text = message['content'].lower()
-        text = text.strip()
-
-
-        # set up regex matches
-        match_coin = re.search("([0-9]{1,2}|)( |)c(oin(s|)|)( |)(w(eight|)|)( |)([0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}|)|)", text)
-        match_dice = re.search("([0-9]{1,2}|)( |)d(ice|ie|)( |)([0-9]{1,2}|)( |)(w(eight|)|)( |)([0-9]{1,2}( [0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}|)|)|)( |)((\+|\-|\/|\*)[0-9]{1,2}|)", text)
-
-        # detects coin input
-        if match_coin:
-            times = test.test(match_coin.group(1))
-            heads = test.test(match_coin.group(1))
-            tails = test.test(match_coin.group(1))
-            clumsy = test.test(match_coin.group(1))
-            a = coin.coin()
-            print("times = {0}\nheads = {1}\ntails = {2}\nclumsy = {3}".format(times.value, heads.value, tails.value, clumsy.value))
-            results = a.parseCoin(times, heads, tails, clumsy)
-            slug = "You flipped a coin " + str(times.value) +  " times, the result was:\n"
-
-        # detects dice input
-        elif match_dice:
-            times = test.test(match_dice.group(1))
-            faces = test.test(match_dice.group(5))
-            number = test.test(match_dice.group(1))
-            load = test.test(match_dice.group(1))
-            rest = test.test(match_dice.group(1))
-            clumsy = test.test(match_dice.group(1))
-            operand = test.test(match_dice.group(1))
-            factor = test.test(match_dice.group(1))
-            faces.ifExists(6)
-            a = die.createSimpleDie(faces.value)
-            print("times = {0}\nfaces = {1}\nnumber = {2}\nload = {3}\nrest = {4}\nclumsy = {5}\noperand = {6}\nvalue = {7}\n".format(times.value, faces.value, number.value, load.value, rest.value, clumsy.value, operand.value, factor.value))
-            results = a.parseDice(times, faces, number, load, rest, clumsy, operand, factor)
-            slug = "You rolled a D" + str(faces.value) + " " + str(times.value) + " times, the result was:\n"
-
-
         # detects help message
         if "help" in text:
             content =   """
@@ -90,10 +50,32 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
         # responds to null input so you can check it's listening
         elif text == "" or text == "?":
             content = "yes?"
+        
+        else:
+            matches = get_message("text", message['content'])
 
-        # catches any other kind of input
-        elif results == "":
-            content = "I'm sorry what was that? I don't understand.\nType `help` to see the commands I know."
+            # catches any other kind of input
+            if len(matches) == 0:
+                content = "I'm sorry what was that? I don't understand.\nType `help` to see the commands I know."
+
+            # detects coin input
+            elif len(matches) == 4:
+                a = coin.coin()
+                print("times = {0}\nheads = {1}\ntails = {2}\nclumsy = {3}".format(times.value, heads.value, tails.value, clumsy.value))
+                results = a.parseCoin(times, heads, tails, clumsy)
+                slug = "You flipped a coin " + str(times.value) +  " times, the result was:\n"
+
+            # detects dice input
+            elif len(matches) == 8:
+                faces.ifExists(6)
+                a = die.createSimpleDie(faces.value)
+                print("times = {0}\nfaces = {1}\nnumber = {2}\nload = {3}\nrest = {4}\nclumsy = {5}\noperand = {6}\nvalue = {7}\n".format(times.value, faces.value, number.value, load.value, rest.value, clumsy.value, operand.value, factor.value))
+                results = a.parseDice(times, faces, number, load, rest, clumsy, operand, factor)
+                slug = "You rolled a D" + str(faces.value) + " " + str(times.value) + " times, the result was:\n"
+
+
+
+
 
         # parses output in message friendly way
         else:
