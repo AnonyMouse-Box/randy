@@ -25,8 +25,8 @@ class message(object):
             raise TypeError("set text first!")
         elif self.__text == "":
             raise TypeError("empty string!")
-        self.__match_coin = re.search("^([0-9]{1,})$", self.__text)
-        self.__match_dice = re.search("^([0-9]{1,})$", self.__text)
+        self.__match_coin = re.search("([0-9]{1,2}|)( |)c(oin(s|)|)( |)(w(eight|)|)( |)([0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}|)|)", self.__text)
+        self.__match_dice = re.search("([0-9]{1,2}|)( |)d(ice|ie|)( |)([0-9]{1,2}|)( |)(w(eight|)|)( |)([0-9]{1,2}( [0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2}|)|)|)( |)((\+|\-|\/|\*)[0-9]{1,2}|)", self.__text)
         if self.__match_coin == None and self.__match_dice == None:
             raise TypeError("no match")
         return;
