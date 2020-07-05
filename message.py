@@ -13,7 +13,7 @@ class message(object):
         return;
 
     def set_text(self, text):
-        self.__text = text.strip()
+        self.__text = (text.strip()).lower
         return;
 
     def get_request(self):
