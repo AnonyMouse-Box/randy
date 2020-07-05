@@ -26,29 +26,29 @@ class message(object):
             raise TypeError("set text first!")
         elif self.__text == "":
             raise TypeError("empty string!")
-        self.__match_coin = re.search("([0-9]+|)( |)c(oin(s|)|)( |)(w(eight|)|)( |)(([0-9]+):([0-9]+)(:([0-9]+)|)|)", self.__text)
-        self.__match_dice = re.search("([0-9]+|)( |)d(ice|ie|)( |)([0-9]+|)( |)(w(eight|)|)( |)(([0-9]+)( ([0-9]+):([0-9]+)(:([0-9]+)|)|)|)( |)((\+|\-|\/|\*)([0-9]+)|)", self.__text)
+        self.__match_coin = re.search("(([0-9]+)? ?)c(oin(s)?)?( ?w(eight)? ?([0-9]+):([0-9]+)(:([0-9]+))?)?", self.__text)
+        self.__match_dice = re.search("((([0-9]+)? ?)d(ice)?( ?([0-9]+)(,([0-9]+),([0-9]+))?)?( ?w(eight)? ?([0-9]+) ([0-9]+):([0-9]+)(:([0-9]+))?)?( ?(\+|\-|\*|\/)([0-9]+))?", self.__text)
         return;
 
     def set_matches(self):
         if self.__match_coin == False and self.__match_dice == False:
             raise TypeError("validate input first!")
         elif self.__match_coin != None:
-            self.__matches[0] = match_coin.group(1)
-            self.__matches[1] = match_coin.group(10)
-            self.__matches[2] = match_coin.group(11)
-            self.__matches[3] = match_coin.group(13)
+            self.__matches[0] = match_coin.group(2)
+            self.__matches[1] = match_coin.group(7)
+            self.__matches[2] = match_coin.group(8)
+            self.__matches[3] = match_coin.group(10)
         elif self.__match_die != None:
-            self.__matches[0] = match_dice.group(1)
-            self.__matches[1] = match_dice.group(6)
-            self.__matches[2] = match_dice.group(9)
-            self.__matches[3] = match_dice.group(10)
-            self.__matches[4] = match_dice.group(16)
-            self.__matches[5] = match_dice.group(18)
-            self.__matches[6] = match_dice.group(19)
-            self.__matches[7] = match_dice.group(16)
-            self.__matches[8] = match_dice.group(24)
-            self.__matches[9] = match_dice.group(25)
+            self.__matches[0] = match_dice.group(2)
+            self.__matches[1] = match_dice.group(5)
+            self.__matches[2] = match_dice.group(7)
+            self.__matches[3] = match_dice.group(8)
+            self.__matches[4] = match_dice.group(11)
+            self.__matches[5] = match_dice.group(12)
+            self.__matches[6] = match_dice.group(13)
+            self.__matches[7] = match_dice.group(15)
+            self.__matches[8] = match_dice.group(17)
+            self.__matches[9] = match_dice.group(18)
         else:
             raise TypeError("no match!")
         return;
