@@ -28,12 +28,14 @@ Coin; @randy {<times> }c{oins weight <heads>:<tails>:<clumsy>}
 Examples; long:- `@randy 20 coin weight 20:10:30`, short:- `@randy 20cw2:1:3`
 ------------
 Dice; @randy {<times> }d{ice <faces> weight <number> <load>:<rest>:<clumsy> <operand>}
-Examples; long:- `@randy 20 dice 17 weight 15 20:10:30 +89`, short:- `@randy 20d17w15 20:10:30+89`
+Examples; long:- `@randy 20 dice 16,24,2 weight 15 20:10:30 +89`, short:- `@randy 20d16,24,2w15 20:10:30+89`
 ------------
 Times - the number of times the action will be performed, with dice all results will be automatically accumulated and a final result given.
 Coin - the command used to define a coin flip.
 Dice - the command used to define a dice roll.
-Faces - the number of faces you want the die to have.
+Faces - the number of faces you want the die to have, becomes dice start value when stop and step are defined, with a default of 1.
+Stop - defines what number to stop at when deciding the size of the dice.
+Step - defines what the increments on the dice should be.
 Weight - the command given to inform that you wish to edit the weightings.
 Number - the number on the dice you wish to load. This must be followed by a space and then the ratio else it will default to 2:1.
 Heads - the weighting you wish heads to have. Weightings should be integer ratios, larger numbers mean it is more likely lower is less likely.
@@ -80,13 +82,14 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                 clumsy = test.test(matches[7])
                 operand = matches[8]
                 value = test.test(matches[9])
-                faces.ifExists(6)
                 if stop.value == "":
+                    faces.ifExists(6)
                     a = die.createSimpleDie(faces.value)
                 else:
+                    faces.ifExists(1)
                     stop.ifExists(6)
                     step.ifExists(1)
-                    a = die.die()
+                    a = die.die(faces, stop, step)
                 print("times = {0}\nfaces = {1}\nstop = {2}\nstep = {3}\nnumber = {4}\nload = {5}\nrest = {6}\nclumsy = {7}\noperand = {8}\nvalue = {9}\n".format(times.value, faces.value, stop.value, step.value, number.value, load.value, rest.value, clumsy.value, operand, factor.value))
                 results = a.parseDice(times, faces, number, load, rest, clumsy, operand, factor)
                 slug = "You rolled a D" + str(faces.value) + " " + str(times.value) + " times, the result was:\n"
