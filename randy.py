@@ -36,7 +36,7 @@ Dice - the command used to define a dice roll.
 Faces - the number of faces you want the die to have.
 Weight - the command given to inform that you wish to edit the weightings.
 Number - the number on the dice you wish to load. This must be followed by a space and then the ratio else it will default to 2:1.
-Heads - the weighting you wish heads to have. Weightings should be from 0 to 99, larger numbers mean it is more likely lower is less likely.
+Heads - the weighting you wish heads to have. Weightings should be integer ratios, larger numbers mean it is more likely lower is less likely.
 Load - the weighting you wish the load number to have.
 Tails - the weighting you wish tails to have.
 Rest - the weighting you wish the rest of the numbers to have.
@@ -70,6 +70,14 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
 
             # detects dice input
             elif len(matches) == 8:
+                times = test.test(matches[0])
+                faces = test.test(matches[1])
+                number = test.test(matches[2])
+                load = test.test(matches[3])
+                rest = test.test(matches[4])
+                clumsy = test.test(matches[5])
+                operand = matches[6]
+                value = test.test(matches[7])
                 faces.ifExists(6)
                 a = die.createSimpleDie(faces.value)
                 print("times = {0}\nfaces = {1}\nnumber = {2}\nload = {3}\nrest = {4}\nclumsy = {5}\noperand = {6}\nvalue = {7}\n".format(times.value, faces.value, number.value, load.value, rest.value, clumsy.value, operand.value, factor.value))
