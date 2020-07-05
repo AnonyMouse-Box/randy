@@ -92,7 +92,7 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                     a = die.die(faces, stop, step)
                 print("times = {0}\nfaces = {1}\nstop = {2}\nstep = {3}\nnumber = {4}\nload = {5}\nrest = {6}\nclumsy = {7}\noperand = {8}\nvalue = {9}\n".format(times.value, faces.value, stop.value, step.value, number.value, load.value, rest.value, clumsy.value, operand, factor.value))
                 results = a.parseDice(times, faces, number, load, rest, clumsy, operand, factor)
-                slug = "You rolled a D" + str(faces.value) + " " + str(times.value) + " times, the result was:\n"
+                slug = "You rolled a D" + str(a.faces) + " " + str(times.value) + " times, the result was:\n"
 
             # catches any other kind of input
             else:
