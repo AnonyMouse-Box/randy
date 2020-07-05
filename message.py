@@ -34,19 +34,19 @@ class message(object):
         if self.__match_coin == False and self.__match_dice == False:
             raise TypeError("validate input first!")
         elif self.__match_coin != None:
-            self.__matches[0] = test.test(match_coin.group(1))
-            self.__matches[1] = test.test(match_coin.group(10))
-            self.__matches[2] = test.test(match_coin.group(11))
-            self.__matches[3] = test.test(match_coin.group(13))
+            self.__matches[0] = match_coin.group(1)
+            self.__matches[1] = match_coin.group(10)
+            self.__matches[2] = match_coin.group(11)
+            self.__matches[3] = match_coin.group(13)
         elif self.__match_die != None:
-            self.__matches[0] = test.test(match_dice.group(1))
-            self.__matches[1] = test.test(match_dice.group(5))
-            self.__matches[2] = test.test(match_dice.group(11))
-            self.__matches[3] = test.test(match_dice.group(13))
-            self.__matches[4] = test.test(match_dice.group(14))
-            self.__matches[5] = test.test(match_dice.group(16))
-            self.__matches[6] = test.test(match_dice.group(19))
-            self.__matches[7] = test.test(match_dice.group(20))
+            self.__matches[0] = match_dice.group(1)
+            self.__matches[1] = match_dice.group(5)
+            self.__matches[2] = match_dice.group(11)
+            self.__matches[3] = match_dice.group(13)
+            self.__matches[4] = match_dice.group(14)
+            self.__matches[5] = match_dice.group(16)
+            self.__matches[6] = match_dice.group(19)
+            self.__matches[7] = match_dice.group(20)
         else:
             raise TypeError("no match!")
         return;
