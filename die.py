@@ -18,6 +18,8 @@ class die:
       return;
 
     def setWeight(self, face, weight):
+      if face not in self.weights:
+          raise TypeError ("yo genius, that number isn't on the dice, get a clue!")
       self.weights[face] = weight
       return;
 
