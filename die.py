@@ -6,6 +6,10 @@ from . import test
 
 class die:
     def __init__(self, start, stop, step):
+      if stop < start:
+          raise TypeError("stop less than start? what're you trying to do? make an anti-dice?! XD")
+      if (stop - start) % step != 0:
+          raise TypeError ("hey dufus! might wanna check your math, that ain't a valid dice.")
       self.faces = int((stop - start) / step)
       self.weights = {}
       for a in range(start, stop, step):
