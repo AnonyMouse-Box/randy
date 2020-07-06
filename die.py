@@ -2,7 +2,7 @@
 
 
 import random
-import test
+from . import test
 
 class die:
     def __init__(self, start, stop, step):
@@ -28,11 +28,14 @@ class die:
         n += self.clumsy
         pseudodie = random.randrange(n + 1)
         valueSum = 0
+        result = False
         for key, value in self.weights.items():
             valueSum += value
             if pseudodie <= valueSum:
                 result = key
                 break
+        if result == False:
+            result == "lost"
         return result;
 
     def rollDice(self, quantity):
