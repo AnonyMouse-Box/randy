@@ -2,7 +2,7 @@
 
 
 import re
-import test
+from . import test
 
 class expression(object):
     def __init__(self):
