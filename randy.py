@@ -86,17 +86,21 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                 clumsy = test.test(matches[7])
                 operand = matches[8]
                 value = test.test(matches[9])
-                if stop.value == "":
-                    faces.ifExists(6)
-                    item = die.createSimpleDie(faces.value)
+                try:
+                    if stop.value == "":
+                        faces.ifExists(6)
+                        item = die.createSimpleDie(faces.value)
+                    else:
+                        faces.ifExists(1)
+                        stop.ifExists(6)
+                        step.ifExists(1)
+                        item = die.die(faces.value, stop.value, step.value)
+                except TypeError as error:
+                    content = error
                 else:
-                    faces.ifExists(1)
-                    stop.ifExists(6)
-                    step.ifExists(1)
-                    item = die.die(faces.value, stop.value, step.value)
-                print("times = {0}\nfaces = {1}\nstop = {2}\nstep = {3}\nnumber = {4}\nload = {5}\nrest = {6}\nclumsy = {7}\noperand = {8}\nvalue = {9}\n".format(times.value, faces.value, stop.value, step.value, number.value, load.value, rest.value, clumsy.value, operand, value.value))
-                results = item.parseDice(times, number, load, rest, clumsy)
-                slug = "You rolled a D" + str(item.faces) + " " + str(times.value) + " times, the result was:\n"
+                    print("times = {0}\nfaces = {1}\nstop = {2}\nstep = {3}\nnumber = {4}\nload = {5}\nrest = {6}\nclumsy = {7}\noperand = {8}\nvalue = {9}\n".format(times.value, faces.value, stop.value, step.value, number.value, load.value, rest.value, clumsy.value, operand, value.value))
+                    results = item.parseDice(times, number, load, rest, clumsy)
+                    slug = "You rolled a D" + str(item.faces) + " " + str(times.value) + " times, the result was:\n"
 
             # catches any other kind of input
             else:
