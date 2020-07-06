@@ -37,14 +37,14 @@ class expression(object):
         return;
 
     def set_matches(self):
-        if self.__match_coin == False and self.__match_dice == False:
+        if self.__match_coin == False or self.__match_dice == False:
             raise TypeError("validate input first!")
-        if self.__match_coin != False and self.__match_coin is not None:
+        if self.__match_coin is not None:
             iterator = 0
             for item in self.__match_coin.group(2, 7, 8, 10):
                 self.__matches_coin.append(item)
                 iterator += 1
-        if self.__match_dice != False and self.__match_dice is not None:
+        if self.__match_dice is not None:
             iterator = 0
             for item in self.__match_dice.group(2, 5, 7, 8, 11, 12, 13, 15, 17, 18):
                 self.__matches_dice.append(item)
@@ -52,12 +52,10 @@ class expression(object):
         print(self.__matches_coin)
         print(self.__matches_dice)
         if self.__match_coin is not None or self.__match_dice is not None:
-            if self.__match_coin is None:
+            if self.__match_coin is None or len(self.__match_coin.group(0)) <= len(self.__match_dice.group(0)):
                 self.__matches = self.__matches_dice
-            elif self.__match_dice is None or len(self.__match_coin.group(0)) > len(self.__match_dice.group(0)):
-                self.__matches = self.__matches_coin
             else:
-                self.__matches = self.__matches_dice
+                self.__matches = self.__matches_coin
         else:
             self.__matches = None
         return;
