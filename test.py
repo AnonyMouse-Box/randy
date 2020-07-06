@@ -7,7 +7,7 @@ class test:
         return;
 
     def ifExists(self, default):
-        if self.value == "":
+        if self.value == "" or self.value is None:
             self.value = default
         else:
             self.value = int(self.value)
