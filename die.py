@@ -2,7 +2,7 @@
 
 
 import random
-from . import test
+import test
 
 class die:
     def __init__(self, start, stop, step):
