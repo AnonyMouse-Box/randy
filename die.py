@@ -10,9 +10,9 @@ class die:
           raise TypeError("stop less than start? what're you trying to do? make an anti-dice?! XD")
       if (stop - start) % step != 0:
           raise TypeError ("hey dufus! might wanna check your math, that ain't a valid dice.")
-      self.faces = int((stop - start) / step)
+      self.faces = int((stop + 1 - start) / step)
       self.weights = {}
-      for a in range(start, stop, step):
+      for a in range(start, stop + 1, step):
         self.weights[a] = 1
       self.clumsy = 0
       return;
@@ -28,33 +28,31 @@ class die:
       return;
 
     def __rollDie(self):
-        n = 0
+        n = 1
         for a in self.weights.values():
             n += a
         n += self.clumsy
-        pseudodie = random.randrange(n + 1)
+        pseudodie = random.randrange(n)
         valueSum = 0
-        result = False
+        result = "lost"
         for key, value in self.weights.items():
             valueSum += value
             if pseudodie <= valueSum:
                 result = key
                 break
-        if result == False:
-            result == "lost"
         return result;
 
     def rollDice(self, quantity):
         dice = [self.__rollDie() for a in range(quantity)]
         return dice;
 
-    def parseDice(self, times, number, load, rest, clumsy):
+    def parseDice(self, times, start, number, load, rest, clumsy):
         times.ifExists(1)
-        number.ifExists(1)
+        number.ifExists(start.value)
         load.ifExists(1)
         rest.ifExists(1)
         clumsy.ifExists(0)
-        for face in self.weights:
+        for face in self.weights.keys():
             self.setWeight(face, rest.value)
         self.setWeight(number.value, load.value)
         self.setClumsy(clumsy.value)
