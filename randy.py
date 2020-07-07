@@ -17,6 +17,7 @@ class Randy(object):
     def handle_message(self, message, bot_handler):
         content = False
         text = message['content']
+        print(text)
 
         # detects help message
         if "help" in text:
@@ -29,13 +30,13 @@ Coin; @randy {<times> }c{oins weight <heads>:<tails>:<clumsy>}
 Examples; long:- `@randy 20 coin weight 20:10:30`, short:- `@randy 20cw2:1:3`
 ------------
 Dice; @randy {<times> }d{ice <faces>,<stop>,<step> weight <number> <load>:<rest>:<clumsy> <operand>}
-Examples; long:- `@randy 20 dice 16,24,2 weight 16 20:10:30 +89`, short:- `@randy 20d16,24,2w15 20:10:30+89`
+Examples; long:- `@randy 20 dice 16,24,2 weight 16 20:10:30 +89`, short:- `@randy 20d16,24,2w16 20:10:30+89`
 ------------
 Times - the number of times the action will be performed, with dice all results will be automatically accumulated and a final result given.
 Coin - the command used to define a coin flip.
 Dice - the command used to define a dice roll.
 Faces - the number of faces you want the die to have, becomes dice start value when stop and step are defined, with a default of 1.
-Stop - defines what number to stop at when deciding the size of the dice.
+Stop - defines what number to stop at when deciding the size of the dice. Both start and stop are inclusive so put the number you would expect on the dice.
 Step - defines what the increments on the dice should be.
 Weight - the command given to inform that you wish to edit the weightings.
 Number - the number on the dice you wish to load. This must be followed by a space and then the ratio else it will default to 2:1.
@@ -100,11 +101,11 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                 else:
                     print("times = {0}\nfaces = {1}\nstop = {2}\nstep = {3}\nnumber = {4}\nload = {5}\nrest = {6}\nclumsy = {7}\noperand = {8}\nvalue = {9}\n".format(times.value, faces.value, stop.value, step.value, number.value, load.value, rest.value, clumsy.value, operand, value.value))
                     try:
-                        results = item.parseDice(times, number, load, rest, clumsy)
+                        results = item.parseDice(times, faces, number, load, rest, clumsy)
                     except TypeError as error:
                         content = error
                     else:
-                        slug = "You rolled a D" + str(item.faces) + " " + str(times.value) + " times, the result was:\n"
+                        slug = "You rolled a D" + str(len(item.weights.keys())) + " " + str(times.value) + " times, the result was:\n"
 
             # catches any other kind of input
             else:
@@ -138,8 +139,8 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                     else:
                         content += " " + operand + " " + str(value.value) + " = " + str(acc)
 
-            # sends completed message and ends
-            bot_handler.send_reply(message, content)
-            return;
+        # sends completed message and ends
+        bot_handler.send_reply(message, content)
+        return;
 
 handler_class = Randy
