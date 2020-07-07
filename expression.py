@@ -16,11 +16,9 @@ class expression(object):
 
     def set_text(self, text):
         self.__text = (text.strip()).lower()
-        print(self.__text)
         return;
 
     def get_request(self):
-        print(self.__matches)
         if self.__matches == []:
             raise TypeError("set matches first!")
         return self.__matches;
@@ -32,8 +30,6 @@ class expression(object):
             raise TypeError("empty string!")
         self.__match_coin = re.search("(([0-9]+) ?)?c(oin(s)?)?( ?w(eight)? ?([0-9]+):([0-9]+)(:([0-9]+))?)?", self.__text)
         self.__match_dice = re.search("(([0-9]+) ?)?d(ice)?( ?([0-9]+)(,([0-9]+),([0-9]+))?)?( ?w(eight)? ?([0-9]+) ([0-9]+):([0-9]+)(:([0-9]+))?)?( ?(\+|\-|\*|\/) ?([0-9]+))?", self.__text)
-        print(self.__match_coin)
-        print(self.__match_dice)
         return;
 
     def set_matches(self):
@@ -49,8 +45,6 @@ class expression(object):
             for item in self.__match_dice.group(2, 5, 7, 8, 11, 12, 13, 15, 17, 18):
                 self.__matches_dice.append(item)
                 iterator += 1
-        print(self.__matches_coin)
-        print(self.__matches_dice)
         if self.__match_coin is not None and self.__match_dice is not None:
             if len(self.__match_coin.group(0)) <= len(self.__match_dice.group(0)):
                 self.__matches = self.__matches_dice
