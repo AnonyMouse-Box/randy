@@ -17,7 +17,6 @@ class Randy(object):
     def handle_message(self, message, bot_handler):
         content = False
         text = message['content']
-        print(text)
 
         # detects help message
         if "help" in text:
@@ -57,7 +56,6 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
             content = "yes?"
         
         else:
-            print(text)
             command = expression.expression()
             matches = command.get_message(text)
             if matches == None:
@@ -71,7 +69,6 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                 clumsy = test.test(matches[3])
                 operand = ""
                 item = coin.coin()
-                print("times = {0}\nheads = {1}\ntails = {2}\nclumsy = {3}".format(times.value, heads.value, tails.value, clumsy.value))
                 results = item.parseCoin(times, heads, tails, clumsy)
                 slug = "You flipped a coin " + str(times.value) +  " times, the result was:\n"
 
@@ -99,7 +96,6 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                 except TypeError as error:
                     content = error
                 else:
-                    print("times = {0}\nfaces = {1}\nstop = {2}\nstep = {3}\nnumber = {4}\nload = {5}\nrest = {6}\nclumsy = {7}\noperand = {8}\nvalue = {9}\n".format(times.value, faces.value, stop.value, step.value, number.value, load.value, rest.value, clumsy.value, operand, value.value))
                     try:
                         results = item.parseDice(times, faces, number, load, rest, clumsy)
                     except TypeError as error:
