@@ -1,4 +1,29 @@
 ------------
 Randy-Alpha-5F05-0C80
 ------------
-Created program
+Created program complete with witty retorts, error handling and help function
+
+Name: Randy
+Synopsis:
+{curly braces define optional input}
+------------
+Coin; @randy {<times> }c{oins weight <heads>:<tails>:<clumsy>}
+Examples; long:- `@randy 20 coin weight 20:10:30`, short:- `@randy 20cw2:1:3`
+------------
+Dice; @randy {<times> }d{ice <faces>,<stop>,<step> weight <number> <load>:<rest>:<clumsy> <operand>}
+Examples; long:- `@randy 20 dice 16,24,2 weight 16 20:10:30 +89`, short:- `@randy 20d16,24,2w16 20:10:30+89`
+------------
+Times - the number of times the action will be performed, with dice all results will be automatically accumulated and a final result given.
+Coin - the command used to define a coin flip.
+Dice - the command used to define a dice roll.
+Faces - the number of faces you want the die to have, becomes dice start value when stop and step are defined, with a default of 1.
+Stop - defines what number to stop at when deciding the size of the dice. Both start and stop are inclusive so put the number you would expect on the dice.
+Step - defines what the increments on the dice should be.
+Weight - the command given to inform that you wish to edit the weightings.
+Number - the number on the dice you wish to load. This must be followed by a space and then the ratio else it will default to 2:1.
+Heads - the weighting you wish heads to have. Weightings should be integer ratios, larger numbers mean it is more likely lower is less likely.
+Load - the weighting you wish the load number to have.
+Tails - the weighting you wish tails to have.
+Rest - the weighting you wish the rest of the numbers to have.
+Clumsy - this is a weighting with a default of 0 that allows the potential for the item to be lost during operation.
+Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform upon the accumulated dice rolls. This is mostly useful for applying buffs or debuffs.
