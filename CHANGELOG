@@ -1,3 +1,8 @@
+Bug located line end of die.py - double increment
+Bug located line 88 randy.py - tests empty string not NoneType
+Bug located except error catch - convert to string first
+
+
 ------------
 Randy-Alpha-5F05-0C80
 ------------
