@@ -51,11 +51,15 @@ class expression(object):
                 iterator += 1
         print(self.__matches_coin)
         print(self.__matches_dice)
-        if self.__match_coin is not None or self.__match_dice is not None:
-            if self.__match_coin is None or len(self.__match_coin.group(0)) <= len(self.__match_dice.group(0)):
+        if self.__match_coin is not None and self.__match_dice is not None:
+            if len(self.__match_coin.group(0)) <= len(self.__match_dice.group(0)):
                 self.__matches = self.__matches_dice
             else:
                 self.__matches = self.__matches_coin
+        elif self.__match_coin is None:
+            self.__matches = self.__matches_dice
+        elif self.__match_dice is None:
+            self.__matches = self.__matches_coin
         else:
             self.__matches = None
         return;
