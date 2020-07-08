@@ -1,3 +1,6 @@
+------------
+Randy-Alpha-5F06-5E00-Patch
+------------
 Fixed bug - double increment at the bottom of die.py
 Fixed bug - testing empty string not NoneType at line 88 of randy.py
 Fixed bug - convert error to string first before piping to content
