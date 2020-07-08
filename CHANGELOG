@@ -1,6 +1,7 @@
-Bug located line end of die.py - double increment
-Bug located line 88 randy.py - tests empty string not NoneType
-Bug located except error catch - convert to string first
+Fixed bug - double increment at the bottom of die.py
+Fixed bug - testing empty string not NoneType at line 88 of randy.py
+Fixed bug - convert error to string first before piping to content
+Ammended - removed from . imports to fall in line with new hosting method
 
 
 ------------
