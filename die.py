@@ -2,7 +2,7 @@
 
 
 import random
-from . import test
+import test
 
 class die:
     def __init__(self, start, stop, step):
@@ -60,4 +60,4 @@ class die:
         return results;
 
 def createSimpleDie(sides):
-    return die(1, sides + 1, 1);
+    return die(1, sides, 1);
