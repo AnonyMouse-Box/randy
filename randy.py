@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 
-from . import expression
-from . import coin
-from . import die
-from . import test
+import expression
+import coin
+import die
+import test
 
 class Randy(object):
     '''
@@ -85,7 +85,7 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                 operand = matches[8]
                 value = test.test(matches[9])
                 try:
-                    if stop.value == "":
+                    if stop.value is None:
                         faces.ifExists(6)
                         item = die.createSimpleDie(faces.value)
                     else:
@@ -94,12 +94,12 @@ Operand - this defines an operand  `+`, `-`, `/`, or `*` that you can perform up
                         step.ifExists(1)
                         item = die.die(faces.value, stop.value, step.value)
                 except TypeError as error:
-                    content = error
+                    content = str(error)
                 else:
                     try:
                         results = item.parseDice(times, faces, number, load, rest, clumsy)
                     except TypeError as error:
-                        content = error
+                        content = str(error)
                     else:
                         slug = "You rolled a D" + str(len(item.weights.keys())) + " " + str(times.value) + " times, the result was:\n"
 
