@@ -1,4 +1,8 @@
 stages:
   - build
-  - test
-  - deploy
+
+build_a:
+  stage: build
+  image: docker:git
+  services:
+    - docker:dind
