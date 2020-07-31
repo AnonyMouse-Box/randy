@@ -5,7 +5,7 @@ cache:
   paths:
     - .cache/pip
     - venv/
-    - app/
+    - bot/
 
 stages:
   - build
