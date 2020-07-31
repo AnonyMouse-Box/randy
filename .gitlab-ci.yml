@@ -12,7 +12,7 @@ stages:
 
 build_a:
   stage: build
-  image: docker:latest
+  image: docker:git
   services:
     - docker:dind
   script:
