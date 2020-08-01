@@ -1,21 +1,37 @@
-variables:
-  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-
-cache:
-  paths:
-    - .cache/pip
-    - venv/
-    - bot/
-
 stages:
+  - test
   - build
+  - deploy
+
+test_a:
+  stage: test
+  tags:
+    - docker
+  image: registry.downbox.co.uk/zulipbots/zulipbotdebug
+  script:
+    - ln -sv $CI_PROJECT_DIR/src/ /debug/zulip_bots/zulip_bots/bots/
+    - source /debug/zulip-api-py3-venv/bin/activate
+    - /debug/tools/test-bots randy
 
 build_a:
   stage: build
-  image: docker:git
+  tags:
+    - docker build
+  image: docker
   services:
     - docker:dind
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $IMAGE_TAG .
-    - docker push $IMAGE_TAG
+    - docker build --build-arg ZULIP_EMAIL --build-arg ZULIP_API_KEY --build-arg ZULIP_SITE --build-arg CI_COMMIT_SHORT_SHA -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG -t $CI_REGISTRY_IMAGE:latest -f Dockerfile $CI_PROJECT_DIR
+    - docker push $CI_REGISTRY_IMAGE
+
+deploy:
+  stage: deploy
+  tags:
+    - shell
+  script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE
+    - docker stop randy || true
+    - docker run -d --rm --name randy $CI_REGISTRY_IMAGE
+    - docker logout $CI_REGISTRY
