@@ -9,7 +9,7 @@ test_a:
     - docker
   image: registry.downbox.co.uk/zulipbots/zulipbotdebug
   script:
-    - ln -sv $CI_PROJECT_DIR/src/ /debug/zulip_bots/zulip_bots/bots/
+    - ln -sv $CI_PROJECT_DIR /debug/zulip_bots/zulip_bots/bots/
     - source /debug/zulip-api-py3-venv/bin/activate
     - /debug/tools/test-bots randy
 
