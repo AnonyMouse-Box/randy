@@ -9,7 +9,7 @@ test_a:
     - docker
   image: registry.downbox.co.uk/zulipbots/zulipbotdebug
   script:
-    - ln -sv $CI_PROJECT_DIR/src/ /debug/zulip_bots/zulip_bots/bots/
+    - ln -sv $CI_PROJECT_DIR/src/ /debug/zulip_bots/zulip_bots/bots/randy
     - source /debug/zulip-api-py3-venv/bin/activate
     - /debug/tools/test-bots randy
 
@@ -17,6 +17,8 @@ build_a:
   stage: build
   only:
     - master
+  dependencies:
+    - test_a
   tags:
     - docker build
   image: docker
@@ -31,6 +33,8 @@ deploy_a:
   stage: deploy
   only:
     - master
+  dependencies:
+    - build_a
   tags:
     - shell
   script:
