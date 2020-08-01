@@ -17,6 +17,8 @@ build_a:
   stage: build
   only:
     - master
+  dependencies:
+    - test_a
   tags:
     - docker build
   image: docker
@@ -31,6 +33,8 @@ deploy_a:
   stage: deploy
   only:
     - master
+  dependencies:
+    - build_a
   tags:
     - shell
   script:
