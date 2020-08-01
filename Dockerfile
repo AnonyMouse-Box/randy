@@ -1,6 +1,6 @@
 FROM registry.downbox.co.uk/zulipbots/zulipbotbase
 
-WORKDIR /bot
+WORKDIR /app
 
 ARG ZULIP_EMAIL
 ARG ZULIP_API_KEY
