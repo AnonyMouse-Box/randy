@@ -1,11 +1,14 @@
-FROM python:latest
+FROM registry.downbox.co.uk/zulipbots/zulipbotbase
 
 WORKDIR /bot
 
-RUN pip install virtualenv
-RUN virtualenv -p python3 /bot
-RUN /bin/bash -c "source /bot/bin/activate && pip install zulip-bots"
+ARG ZULIP_EMAIL
+ARG ZULIP_API_KEY
+ARG ZULIP_SITE
+ARG CI_COMMIT_SHORT_SHA
 
-COPY $CI_PROJECT_DIR/src/ /bot/
+COPY src/*.py ./
+
+ENV ZULIP_EMAIL="$ZULIP_EMAIL" ZULIP_API_KEY="$ZULIP_API_KEY" ZULIP_SITE="$ZULIP_SITE" CI_COMMIT_SHORT_SHA="$CI_COMMIT_SHORT_SHA"
 
 CMD ["/bin/bash","-c","source /bot/bin/activate && zulip-run-bot randy.py"]
