@@ -41,5 +41,8 @@ deploy_a:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker pull $CI_REGISTRY_IMAGE
     - docker stop randy || true
-    - docker run -d --rm --name randy $CI_REGISTRY_IMAGE
+    - docker wait randy || true
+    - docker rm randy || true
+    - docker run -d --restart always --name randy $CI_REGISTRY_IMAGE
+    - docker ps | grep $CI_REGISTRY_IMAGE
     - docker logout $CI_REGISTRY
