@@ -44,5 +44,6 @@ deploy_a:
     - docker wait randy || true
     - docker rm randy || true
     - docker run -d --restart always --name randy $CI_REGISTRY_IMAGE
+    - sleep 10
     - docker ps | grep $CI_REGISTRY_IMAGE
     - docker logout $CI_REGISTRY
