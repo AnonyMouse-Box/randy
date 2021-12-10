@@ -2,4 +2,4 @@ theme: jekyll-theme-slate
 title: Randy
 description: a Zulip-bot providing random number generation and game objects
 permalink: pretty
-show_downloads: false
+show_downloads: true
