@@ -1,0 +1,5 @@
+theme: jekyll-theme-slate
+title: Randy
+description: a Zulip bot for generating random game elements 
+permalink: pretty
+show_downloads: false
