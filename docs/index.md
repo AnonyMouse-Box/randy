@@ -1,3 +1,5 @@
+[Home](https://github.enim.ga/)
+
 # Randy
 #### Zulip-bot providing random number generation and game objects
 
